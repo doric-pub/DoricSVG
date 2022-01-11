@@ -1,5 +1,4 @@
 import { Panel, Group, vlayout, layoutConfig, Gravity, text, Text, Color, navbar, AssetsResource, image } from "doric";
-
 @Entry
 class example extends Panel {
     onShow() {

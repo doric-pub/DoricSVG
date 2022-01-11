@@ -18,4 +18,6 @@ Pod::Spec.new do |s|
     s.resource     =  "dist/**/*"
     s.public_header_files = 'iOS/Classes/**/*.h'
     s.dependency 'DoricCore'
+    s.dependency 'SVGAPlayer'
+
 end
