@@ -1,8 +1,8 @@
 require "json"
 
-package = JSON.parse(File.read(File.join(__dir__, "../package.json")))
+package = JSON.parse(File.read(File.join(__dir__, "../../package.json")))
 version = package['dependencies']["doric"]
-version = version.gsub('^','')
+version = version.gsub('^','').gsub('>=','')
 
 source 'https://cdn.cocoapods.org/'
 # Uncomment the next line to define a global platform for your project
@@ -22,17 +22,20 @@ target 'example' do
 
   pod 'PINCache'
 
-  dir_node_modules = File.join(__dir__,"../node_modules")
-  Dir.foreach(dir_node_modules) do |file|
-    if File.exist?(File.join(dir_node_modules, file, "__doric_library__"))
-      puts "Doric Library: #{File.join(dir_node_modules, file)}"
-      ret = Dir.glob(File.join(dir_node_modules,file,"*.podspec"))
-      if(ret.length > 0)
-        podspecPath = ret[0]
-        extn = File.extname  podspecPath 
-        podspecName = File.basename podspecPath, extn
-        pod podspecName,  :path => File.join(dir_node_modules, file)
-      end
-    end
-  end  
+  pod 'DoricSVGView',           :path => '../../'
+
+
+  # dir_node_modules = File.join(__dir__,"../node_modules")
+  # Dir.foreach(dir_node_modules) do |file|
+  #   if File.exist?(File.join(dir_node_modules, file, "__doric_library__"))
+  #     puts "Doric Library: #{File.join(dir_node_modules, file)}"
+  #     ret = Dir.glob(File.join(dir_node_modules,file,"*.podspec"))
+  #     if(ret.length > 0)
+  #       podspecPath = ret[0]
+  #       extn = File.extname  podspecPath 
+  #       podspecName = File.basename podspecPath, extn
+  #       pod podspecName,  :path => File.join(dir_node_modules, file)
+  #     end
+  #   end
+  # end  
 end
