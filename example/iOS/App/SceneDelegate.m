@@ -6,12 +6,15 @@
 #import <DoricDevkit/DoricDev.h>
 
 #endif
+#import "DoricSVGViewLibrary.h"
 
 @interface SceneDelegate ()
 @end
 
 @implementation SceneDelegate
 - (void)scene:(UIScene *)scene willConnectToSession:(UISceneSession *)session options:(UISceneConnectionOptions *)connectionOptions {
+    
+    [Doric registerLibrary:[DoricSVGViewLibrary new]];
     UIWindowScene *windowScene = (UIWindowScene *) scene;
     NSString *bundleName = @"example";
     DoricViewController *doricViewController = [[DoricViewController alloc] initWithSource:[NSString stringWithFormat:@"assets://src/%@.js", bundleName]

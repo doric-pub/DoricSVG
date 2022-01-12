@@ -6,7 +6,8 @@
 //
 
 #import "DoricViewNode.h"
+#import <SDWebImageSVGKitPlugin/SDWebImageSVGKitPlugin.h>
 
-@interface DoricSVGViewNode : DoricViewNode
+@interface DoricSVGViewNode : DoricViewNode<SVGKImageView *>
 
 @end
