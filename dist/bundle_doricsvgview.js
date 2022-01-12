@@ -27,6 +27,26 @@ __decorate([
     doric.Property,
     __metadata("design:type", String)
 ], SVGView.prototype, "url", void 0);
+__decorate([
+    doric.Property,
+    __metadata("design:type", String)
+], SVGView.prototype, "imageName", void 0);
+__decorate([
+    doric.Property,
+    __metadata("design:type", String)
+], SVGView.prototype, "rawString", void 0);
+__decorate([
+    doric.Property,
+    __metadata("design:type", doric.Resource)
+], SVGView.prototype, "localResource", void 0);
+__decorate([
+    doric.Property,
+    __metadata("design:type", Number)
+], SVGView.prototype, "scaleType", void 0);
+__decorate([
+    doric.Property,
+    __metadata("design:type", Function)
+], SVGView.prototype, "loadCallback", void 0);
 function svgView(config) {
     const ret = new SVGView();
     ret.layoutConfig = doric.layoutConfig().fit();

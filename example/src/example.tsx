@@ -9,6 +9,8 @@ import {
     Text,
     Color,
     log,
+    MainBundleResource,
+    AndroidAssetsResource,
 } from "doric";
 import { SVGView } from "doric-svgview";
 
@@ -33,7 +35,10 @@ class Example extends Panel {
                 ref={svgRef}
                 backgroundColor={Color.CYAN}
                 layoutConfig={layoutConfig().mostWidth().justHeight().configWeight(1)}
-                url={svgUrls[this.index % svgUrls.length]}
+                // url={svgUrls[this.index % svgUrls.length]}
+                localResource={Environment.platform === 'Android'
+                ? new AndroidAssetsResource('assets/Lion.svg')
+                : new MainBundleResource("assets/Lion.svg")}
             />
             <Text layoutConfig={layoutConfig().mostWidth().justHeight()} height={60}
                 backgroundColor={Color.BLACK} textSize={18} textColor={Color.WHITE} fontStyle="bold"
