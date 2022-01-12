@@ -12,7 +12,7 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
-    "doric-svgview": "file:../",
+    "doric-svg": "file:../",
     "rollup": "^2.59.0",
     "typescript": "^4.2.2"
   },

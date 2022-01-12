@@ -1,6 +1,6 @@
 import { View, Property, layoutConfig, ScaleType, Resource } from "doric";
 
-export class SVGView extends View {
+export class SVG extends View implements JSX.ElementChildrenAttribute {
   @Property
   url?: string;
 
@@ -25,11 +25,16 @@ export class SVGView extends View {
   scaleType?: ScaleType;
 
   @Property
-  loadCallback?: (info: { width: number; height: number }) => void;
+  set innerElement(e: string) {
+    this.rawString = e;
+  }
+
+  @Property
+  loadCallback?: (image: { width: number; height: number} | undefined) => void
 }
 
-export function svgView(config?: Partial<SVGView>) {
-  const ret = new SVGView();
+export function svg(config?: Partial<SVG>) {
+  const ret = new SVG;
   ret.layoutConfig = layoutConfig().fit();
   if (config) {
     ret.apply(config);

@@ -6,7 +6,7 @@ export default [
     input: `build/index.js`,
     output: {
       format: "cjs",
-      file: `dist/bundle_doricsvgview.js`,
+      file: `dist/bundle_doricsvg.js`,
       sourcemap: true,
     },
     plugins: [resolve({ mainFields: ["jsnext"] }), commonjs(), json()],

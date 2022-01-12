@@ -11,8 +11,9 @@ import {
     log,
     MainBundleResource,
     AndroidAssetsResource,
+    ScaleType,
 } from "doric";
-import { SVGView } from "doric-svgview";
+import { SVG } from "doric-svg";
 
 const svgUrls = [
     "https://upload.wikimedia.org/wikipedia/commons/1/14/Mahuri.svg",
@@ -26,20 +27,28 @@ class Example extends Panel {
     index: number = 0
 
     onShow() {
-        navbar(context).setTitle("SVGView2");
+        navbar(context).setTitle("SVG");
     }
     build(rootView: Group) {
-        const svgRef = createRef<SVGView>();
+        const svgRef = createRef<SVG>();
         <VLayout parent={rootView} layoutConfig={layoutConfig().most()}>
-            <SVGView
+            <SVG
                 ref={svgRef}
                 backgroundColor={Color.CYAN}
                 layoutConfig={layoutConfig().mostWidth().justHeight().configWeight(1)}
-                // url={svgUrls[this.index % svgUrls.length]}
-                localResource={Environment.platform === 'Android'
-                ? new AndroidAssetsResource('assets/Lion.svg')
-                : new MainBundleResource("assets/Lion.svg")}
+                scaleType={ScaleType.ScaleAspectFit}
+                url={svgUrls[this.index % svgUrls.length]}
+                loadCallback={(info) => {
+                    if (info) {
+                        log(`load width: ${info.width}, height: ${info.height}`)
+                    }
+                }}
+            // localResource={Environment.platform === 'Android'
+            // ? new AndroidAssetsResource('assets/Lion.svg')
+            // : new MainBundleResource("assets/Lion.svg")}
             />
+
+
             <Text layoutConfig={layoutConfig().mostWidth().justHeight()} height={60}
                 backgroundColor={Color.BLACK} textSize={18} textColor={Color.WHITE} fontStyle="bold"
                 onClick={() => {

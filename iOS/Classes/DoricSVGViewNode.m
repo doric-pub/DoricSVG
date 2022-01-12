@@ -1,6 +1,6 @@
 //
 //  DoricSVGViewNode.m
-//  DoricSVGView
+//  DoricSVG
 //
 //  Created by shangkun on 2022/1/11.
 //

@@ -22,7 +22,7 @@ target 'example' do
 
   pod 'PINCache'
 
-  pod 'DoricSVGView',           :path => '../../'
+  pod 'DoricSVG',           :path => '../../'
 
 
   # dir_node_modules = File.join(__dir__,"../node_modules")

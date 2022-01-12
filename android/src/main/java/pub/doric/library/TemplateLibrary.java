@@ -9,15 +9,15 @@ import pub.doric.DoricLibrary;
 import pub.doric.DoricRegistry;
 
 @DoricComponent
-public class DoricSVGViewLibrary extends DoricLibrary {
+public class DoricSVGLibrary extends DoricLibrary {
     @Override
     public void load(DoricRegistry registry) {
         try {
-            InputStream is = Doric.application().getAssets().open("bundle_doricsvgview.js");
+            InputStream is = Doric.application().getAssets().open("bundle_doricsvg.js");
             byte[] bytes = new byte[is.available()];
             is.read(bytes);
             String content = new String(bytes);
-            registry.registerJSBundle("doricsvgview", content);
+            registry.registerJSBundle("doricsvg", content);
         } catch (IOException e) {
             e.printStackTrace();
         }

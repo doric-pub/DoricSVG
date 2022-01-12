@@ -1,2 +1,1 @@
-export * from "./lib/DemoPlugin";
-export * from "./lib/SVGView";
+export * from "./lib/SVG";
