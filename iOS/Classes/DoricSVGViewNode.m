@@ -118,6 +118,7 @@
             DoricLog(@"Cannot load resource type = %@, identifier = %@, %@", type, identifier, e.reason);
         }];
     }else if ([@"scaleType" isEqualToString:name]) {
+        self.view.sd_adjustContentMode = YES; // make `contentMode` works
         switch ([prop integerValue]) {
             case 1: {
                 self.view.contentMode = UIViewContentModeScaleAspectFit;
@@ -125,6 +126,10 @@
             }
             case 2: {
                 self.view.contentMode = UIViewContentModeScaleAspectFill;
+                break;
+            }
+            case 3: {
+                self.view.contentMode = UIViewContentModeRedraw;
                 break;
             }
             default: {
