@@ -1,13 +1,17 @@
 package pub.doric.android;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import pub.doric.Doric;
 import pub.doric.DoricFragment;
 import pub.doric.devkit.DoricDev;
+import pub.doric.library.DoricSVGLibrary;
 import pub.doric.navbar.BaseDoricNavBar;
 
 public class MainActivity extends AppCompatActivity {
@@ -15,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Doric.registerLibrary(new DoricSVGLibrary());
         String source = "assets://src/" + BUNDLE_NAME + ".js";
         getIntent().putExtra("source", source);
         getIntent().putExtra("alias", BUNDLE_NAME);
@@ -23,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         this.getSupportFragmentManager().beginTransaction().add(R.id.container, new DoricFragment()).commit();
         BaseDoricNavBar doricNavBar = findViewById(R.id.doric_nav_bar);
         doricNavBar.setBackIconVisible(false);
-
+        Log.d("blend", "MainActivity onCreate");
         TextView textView = new TextView(this);
         textView.setText("Devkit");
         textView.setOnClickListener(new View.OnClickListener() {

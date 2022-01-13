@@ -1,5 +1,10 @@
 package pub.doric.library;
 
+import android.util.Log;
+import android.widget.ImageView;
+
+import com.github.pengfeizhou.jscore.JSValue;
+
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -21,6 +26,7 @@ public class DoricSVGLibrary extends DoricLibrary {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        registry.registerNativePlugin(DoricDemoPlugin.class);
+        Log.d("blend", "load(DoricRegistry registry)");
+        registry.registerViewNode(DoricSVGViewNode.class);
     }
 }

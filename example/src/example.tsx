@@ -22,6 +22,7 @@ const svgUrls = [
     "https://upload.wikimedia.org/wikipedia/commons/2/2d/Sample_SVG_file%2C_signature.svg",
     "https://simpleicons.org/icons/github.svg",
 ]
+
 const svgRawString = `<?xml version="1.1" encoding="UTF-8"?>
 <svg width="480px" height="480px" xmlns="http://www.w3.org/2000/svg" version="1.1">
 	<title>Note</title>
@@ -40,6 +41,7 @@ class Example extends Panel {
     onShow() {
         navbar(context).setTitle("SVG");
     }
+
     build(rootView: Group) {
         const svgRef = createRef<SVG>();
         <VLayout parent={rootView} layoutConfig={layoutConfig().most()}>
@@ -49,7 +51,6 @@ class Example extends Panel {
                 scrollable={true}
                 content={
                     <VLayout
-                        backgroundColor={Color.RED}
                         space={20}
                         gravity={Gravity.CenterX}
                         layoutConfig={layoutConfig().mostWidth().fitHeight()}>
@@ -57,7 +58,7 @@ class Example extends Panel {
                             // 1. loaded by URL.
                             ref={svgRef}
                             backgroundColor={Color.WHITE}
-                            layoutConfig={layoutConfig().just()}
+                            layoutConfig={layoutConfig().just().configAlignment(Gravity.Center)}
                             width={300}
                             height={300}
                             scaleType={ScaleType.ScaleAspectFit}
@@ -74,7 +75,7 @@ class Example extends Panel {
                         <SVG
                             // 2. loaded by customized resource loader
                             backgroundColor={Color.WHITE}
-                            layoutConfig={layoutConfig().just()}
+                            layoutConfig={layoutConfig().just().configAlignment(Gravity.Center)}
                             width={300}
                             height={300}
                             scaleType={ScaleType.ScaleAspectFit}
@@ -86,7 +87,7 @@ class Example extends Panel {
                         <SVG
                             // 3. loaded by rawString
                             backgroundColor={Color.WHITE}
-                            layoutConfig={layoutConfig().just()}
+                            layoutConfig={layoutConfig().just().configAlignment(Gravity.Center)}
                             width={300}
                             height={300}
                             scaleType={ScaleType.ScaleAspectFit}
