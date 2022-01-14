@@ -19,7 +19,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Doric.registerLibrary(new DoricSVGLibrary());
         String source = "assets://src/" + BUNDLE_NAME + ".js";
         getIntent().putExtra("source", source);
         getIntent().putExtra("alias", BUNDLE_NAME);

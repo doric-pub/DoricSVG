@@ -63,15 +63,8 @@ class Example extends Panel {
                             height={300}
                             scaleType={ScaleType.ScaleAspectFit}
                             url={svgUrls[this.index % svgUrls.length]}
-                            loadCallback={(info) => {
-                                if (info) {
-                                    log(`load width: ${info.width}, height: ${info.height}`)
-                                    // svgRef.current.width = info.width
-                                    // svgRef.current.height = info.height
-                                }
-                            }}
+                            
                         />
-
                         <SVG
                             // 2. loaded by customized resource loader
                             backgroundColor={Color.WHITE}
@@ -91,6 +84,13 @@ class Example extends Panel {
                             width={300}
                             height={300}
                             scaleType={ScaleType.ScaleAspectFit}
+                            loadCallback={(info) => {
+                                if (info) {
+                                    log(`load width22: ${info.width}, height: ${info.height}`)
+                                    // svgRef.current.width = info.width
+                                    // svgRef.current.height = info.height
+                                }
+                            }}
                         >
                             {svgRawString}
                         </SVG>

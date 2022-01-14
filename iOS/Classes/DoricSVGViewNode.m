@@ -11,7 +11,6 @@
 
 @interface DoricSVGViewNode ()
 @property(nonatomic, copy) NSString *loadCallbackId;
-@property(nonatomic, assign) CGFloat imageScale;
 @end
 
 @implementation DoricSVGViewNode
@@ -26,9 +25,6 @@
 }
 
 - (void)blend:(NSDictionary *)props {
-    [props[@"imageScale"] also:^(NSNumber *it) {
-        self.imageScale = it.floatValue;
-    }];
     [props[@"loadCallback"] also:^(NSString *it) {
         self.loadCallbackId = it;
     }];
@@ -40,7 +36,6 @@
         NSURL *url = [NSURL URLWithString:prop];
         [self.view sd_setImageWithURL:url placeholderImage:nil options:SDWebImageRetryFailed completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
             if (image) {
-                NSLog(@"SVGKLayeredImageView SVG load success");
                 if (self.loadCallbackId.length > 0) {
                     [self callJSResponse:self.loadCallbackId,
                      @{
@@ -55,22 +50,6 @@
                 }
             }
         }];
-    } else if ([@"imageName" isEqualToString:name]) {
-        SVGKImage *image = [SVGKImage imageNamed:prop];
-        if (image) {
-            self.view.image = image;
-        }
-        if (self.loadCallbackId.length > 0) {
-            if (image) {
-                [self callJSResponse:self.loadCallbackId,
-                 @{
-                    @"width": @(image.size.width),
-                    @"height": @(image.size.height),
-                }, nil];
-            } else {
-                [self callJSResponse:self.loadCallbackId, nil];
-            }
-        }
     } else if ([@"rawString" isEqualToString:name]) {
         SVGKSource *source = [SVGKSourceString sourceFromContentsOfString:prop];
         SVGKImage *image = [SVGKImage imageWithSource:source];
@@ -88,7 +67,6 @@
                 [self callJSResponse:self.loadCallbackId, nil];
             }
         }
-        
     } else if ([@"localResource" isEqualToString:name]) {
         NSString *type = prop[@"type"];
         NSString *identifier = prop[@"identifier"];
@@ -126,10 +104,6 @@
             }
             case 2: {
                 self.view.contentMode = UIViewContentModeScaleAspectFill;
-                break;
-            }
-            case 3: {
-                self.view.contentMode = UIViewContentModeRedraw;
                 break;
             }
             default: {

@@ -26,7 +26,6 @@ public class DoricSVGLibrary extends DoricLibrary {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Log.d("blend", "load(DoricRegistry registry)");
         registry.registerViewNode(DoricSVGViewNode.class);
     }
 }
