@@ -7,11 +7,6 @@ Doric plugins for SVG.
 
 <img src="../main/images/android.png" width="50%">
 
-### Doric
-
-> [Doric](https://doric.pub/docs/index.html) 是一个极简高效的跨端开发框架，使用[TypeScript](https://www.typescriptlang.org/)作为开发语言，
-上层遵循MVVM设计，可在多平台上执行，目前已经支持Android、iOS、Web及Qt等平台。
-
 ### Usage
 
 ```

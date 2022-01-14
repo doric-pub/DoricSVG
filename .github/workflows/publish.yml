@@ -22,7 +22,7 @@ jobs:
           git config user.email "shangkunwu@msn.com"
           git config user.name "Xcoder1011"
           git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-          git checkout master
+          git checkout main
       - name: Install Cocoapods
         run: |
           gem install cocoapods
