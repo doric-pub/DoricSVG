@@ -19,7 +19,7 @@
     // `SVGKLayeredImageView`, best on performance and do actually vector image rendering (translate SVG to CALayer tree).
     SVGKImageView *imageView = [[SVGKLayeredImageView alloc] initWithSVGKImage:nil];
     imageView.sd_adjustContentMode = YES; // make `contentMode` works
-    imageView.contentMode = UIViewContentModeScaleAspectFit;
+    imageView.contentMode = UIViewContentModeScaleAspectFill;
     imageView.clipsToBounds = YES;
     return imageView;
 }
@@ -117,6 +117,5 @@
         [super blendView:view forPropName:name propValue:prop];
     }
 }
-
 
 @end

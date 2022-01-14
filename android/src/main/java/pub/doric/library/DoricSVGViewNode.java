@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Picture;
 import android.graphics.drawable.BitmapDrawable;
@@ -243,5 +244,14 @@ public class DoricSVGViewNode extends ViewNode<ImageView> {
                 }
             }
         });
+    }
+
+    @Override
+    protected void reset() {
+        super.reset();
+        mView.setImageDrawable(null);
+        mView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        loadCallbackId = "";
+        imageScale = DoricUtils.getScreenScale();
     }
 }

@@ -4,14 +4,6 @@ export class SVG extends View implements JSX.ElementChildrenAttribute {
   @Property
   url?: string;
 
-  /**
-   * Read svg image from resource
-   * For android,it will try to read from drawable.
-   * For iOS,it will try to read from Image.Assets.
-   */
-  @Property
-  imageName?: string;
-
   @Property
   rawString?: string;
 
@@ -36,6 +28,7 @@ export class SVG extends View implements JSX.ElementChildrenAttribute {
 export function svg(config?: Partial<SVG>) {
   const ret = new SVG;
   ret.layoutConfig = layoutConfig().fit();
+  ret.scaleType = ScaleType.ScaleAspectFill;
   if (config) {
     ret.apply(config);
   }

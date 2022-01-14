@@ -25,10 +25,6 @@ __decorate([
 __decorate([
     doric.Property,
     __metadata("design:type", String)
-], SVG.prototype, "imageName", void 0);
-__decorate([
-    doric.Property,
-    __metadata("design:type", String)
 ], SVG.prototype, "rawString", void 0);
 __decorate([
     doric.Property,
