@@ -2,11 +2,9 @@ Pod::Spec.new do |s|
     s.name             = 'DoricSVG'
     s.version          = '0.1.3'
     s.summary          = 'Doric extension library for SVG'
-  
     s.description      = <<-DESC
     Doric SVG plugin to load SVG.
                             DESC
-
     s.homepage         = 'https://github.com/doric-pub/DoricSVG'
     s.license          = { :type => 'Apache-2.0', :file => 'LICENSE' }
     s.author           = { 'Xcoder1011' => 'shangkunwu@msn.com' }
