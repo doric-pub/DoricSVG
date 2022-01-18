@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'DoricSVG'
-    s.version          = '0.1.1'
+    s.version          = '0.1.3'
     s.summary          = 'Doric extension library for SVG'
   
     s.description      = <<-DESC
@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
 
     s.homepage         = 'https://github.com/doric-pub/DoricSVG'
     s.license          = { :type => 'Apache-2.0', :file => 'LICENSE' }
-    s.author           = { 'wushangkun' => 'shangkunwu@msn.com' }
+    s.author           = { 'Xcoder1011' => 'shangkunwu@msn.com' }
     s.source           = { :git => 'https://github.com/doric-pub/DoricSVG.git', :tag => s.version.to_s }
   
     s.ios.deployment_target = '9.0'

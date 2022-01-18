@@ -46,6 +46,7 @@ __decorate([
 function svg(config) {
     const ret = new SVG;
     ret.layoutConfig = doric.layoutConfig().fit();
+    ret.scaleType = doric.ScaleType.ScaleAspectFill;
     if (config) {
         ret.apply(config);
     }
