@@ -16,7 +16,6 @@ export class SVG extends View implements JSX.ElementChildrenAttribute {
   @Property
   scaleType?: ScaleType;
 
-  @Property
   set innerElement(e: string) {
     this.rawString = e;
   }
@@ -28,7 +27,7 @@ export class SVG extends View implements JSX.ElementChildrenAttribute {
 export function svg(config?: Partial<SVG>) {
   const ret = new SVG;
   ret.layoutConfig = layoutConfig().fit();
-  ret.scaleType = ScaleType.ScaleAspectFill;
+  ret.scaleType = ScaleType.ScaleAspectFit;
   if (config) {
     ret.apply(config);
   }

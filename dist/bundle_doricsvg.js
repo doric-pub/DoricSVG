@@ -36,17 +36,12 @@ __decorate([
 ], SVG.prototype, "scaleType", void 0);
 __decorate([
     doric.Property,
-    __metadata("design:type", String),
-    __metadata("design:paramtypes", [String])
-], SVG.prototype, "innerElement", null);
-__decorate([
-    doric.Property,
     __metadata("design:type", Function)
 ], SVG.prototype, "loadCallback", void 0);
 function svg(config) {
     const ret = new SVG;
     ret.layoutConfig = doric.layoutConfig().fit();
-    ret.scaleType = doric.ScaleType.ScaleAspectFill;
+    ret.scaleType = doric.ScaleType.ScaleAspectFit;
     if (config) {
         ret.apply(config);
     }

@@ -1,10 +1,4 @@
 package pub.doric.library;
-
-import android.util.Log;
-import android.widget.ImageView;
-
-import com.github.pengfeizhou.jscore.JSValue;
-
 import java.io.IOException;
 import java.io.InputStream;
 

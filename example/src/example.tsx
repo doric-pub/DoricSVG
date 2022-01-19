@@ -10,10 +10,10 @@ import {
     Color,
     log,
     MainBundleResource,
-    AndroidAssetsResource,
     ScaleType,
     Gravity,
     Scroller,
+    AssetsResource,
 } from "doric";
 import { SVG } from "doric-svg";
 
@@ -23,7 +23,7 @@ const svgUrls = [
     "https://simpleicons.org/icons/github.svg",
 ]
 
-const svgRawString = `<?xml version="1.1" encoding="UTF-8"?>
+const xmlString = `<?xml version="1.1" encoding="UTF-8"?>
 <svg width="480px" height="480px" xmlns="http://www.w3.org/2000/svg" version="1.1">
 	<title>Note</title>
 	<g>
@@ -70,26 +70,25 @@ class Example extends Panel {
                             }}
                         />
                         <SVG
-                            // 2. loaded by customized resource loader
+                            // 2. loaded by customized resource loader.
                             backgroundColor={Color.WHITE}
                             layoutConfig={layoutConfig().just().configAlignment(Gravity.Center)}
-                            width={300}
-                            height={300}
+                            width={200}
+                            height={200}
                             scaleType={ScaleType.ScaleAspectFit}
                             localResource={Environment.platform === 'Android'
-                                ? new AndroidAssetsResource('assets/Lion.svg')
-                                : new MainBundleResource("assets/Lion.svg")}
+                                ? new AssetsResource('android.svg')
+                                : new MainBundleResource("assets/apple.svg")}
                         />
-
                         <SVG
-                            // 3. loaded by rawString
+                            // 3. loaded by xml string
                             backgroundColor={Color.WHITE}
                             layoutConfig={layoutConfig().just().configAlignment(Gravity.Center)}
-                            width={300}
-                            height={300}
+                            width={100}
+                            height={100}
                             scaleType={ScaleType.ScaleAspectFit}
                         >
-                            {svgRawString}
+                            {xmlString}
                         </SVG>
                     </VLayout>
                 }></Scroller>
@@ -99,7 +98,6 @@ class Example extends Panel {
                 onClick={() => {
                     this.index++
                     svgRef.current.url = svgUrls[this.index % svgUrls.length]
-                    log('onClick Next')
                 }}>
                 Next
             </Text>

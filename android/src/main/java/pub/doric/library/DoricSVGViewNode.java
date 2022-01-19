@@ -60,7 +60,7 @@ public class DoricSVGViewNode extends ViewNode<ImageView> {
                 super.onMeasure(widthMeasureSpec, heightMeasureSpec);
             }
         };
-        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
         imageView.setAdjustViewBounds(true);
         return imageView;
     }

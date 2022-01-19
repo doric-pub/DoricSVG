@@ -14,12 +14,13 @@
 @end
 
 @implementation DoricSVGViewNode
-
 - (SVGKImageView *)build {
     // `SVGKLayeredImageView`, best on performance and do actually vector image rendering (translate SVG to CALayer tree).
     SVGKImageView *imageView = [[SVGKLayeredImageView alloc] initWithSVGKImage:nil];
+    // hide "Missing SVG" placeholder.
+    ((SVGKLayer*) imageView.layer).SVGImage = nil;
     imageView.sd_adjustContentMode = YES; // make `contentMode` works
-    imageView.contentMode = UIViewContentModeScaleAspectFill;
+    imageView.contentMode = UIViewContentModeScaleAspectFit;
     imageView.clipsToBounds = YES;
     return imageView;
 }
@@ -34,14 +35,18 @@
 - (void)blendView:(SVGKImageView *)view forPropName:(NSString *)name propValue:(id)prop {
     if ([@"url" isEqualToString:name]) {
         NSURL *url = [NSURL URLWithString:prop];
+        __weak typeof(self) weakself = self;
         [self.view sd_setImageWithURL:url placeholderImage:nil options:SDWebImageRetryFailed completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+            __strong typeof(weakself) self = weakself;
+            if (!self) {
+                return;
+            }
             if (image) {
                 if (self.loadCallbackId.length > 0) {
                     [self callJSResponse:self.loadCallbackId,
                      @{
                         @"width": @(image.size.width),
                         @"height": @(image.size.height),
-                        @"imageURL": imageURL.absoluteString ?: @"",
                     }, nil];
                 }
             } else {
@@ -51,22 +56,8 @@
             }
         }];
     } else if ([@"rawString" isEqualToString:name]) {
-        SVGKSource *source = [SVGKSourceString sourceFromContentsOfString:prop];
-        SVGKImage *image = [SVGKImage imageWithSource:source];
-        if (image) {
-            self.view.image = image;
-        }
-        if (self.loadCallbackId.length > 0) {
-            if (image) {
-                [self callJSResponse:self.loadCallbackId,
-                 @{
-                    @"width": @(image.size.width),
-                    @"height": @(image.size.height),
-                }, nil];
-            } else {
-                [self callJSResponse:self.loadCallbackId, nil];
-            }
-        }
+        NSData *data = [prop dataUsingEncoding:NSUTF8StringEncoding];
+        [self configImageWithData:data];
     } else if ([@"localResource" isEqualToString:name]) {
         NSString *type = prop[@"type"];
         NSString *identifier = prop[@"identifier"];
@@ -74,29 +65,13 @@
                                                      load:identifier withResourceType:type withContext:self.doricContext] fetchRaw];
         [asyncResult setResultCallback:^(NSData *imageData) {
             [self.doricContext dispatchToMainQueue:^{
-                SVGKImage *image = [SVGKImage imageWithData:imageData];
-                if (image) {
-                    self.view.image = image;
-                }
-                if (self.loadCallbackId.length > 0) {
-                    if (image) {
-                        [self callJSResponse:self.loadCallbackId,
-                         @{
-                            @"width": @(image.size.width),
-                            @"height": @(image.size.height),
-                        },
-                         nil];
-                    } else {
-                        [self callJSResponse:self.loadCallbackId, nil];
-                    }
-                }
+                [self configImageWithData:imageData];
             }];
         }];
         [asyncResult setExceptionCallback:^(NSException *e) {
             DoricLog(@"Cannot load resource type = %@, identifier = %@, %@", type, identifier, e.reason);
         }];
     }else if ([@"scaleType" isEqualToString:name]) {
-        self.view.sd_adjustContentMode = YES; // make `contentMode` works
         switch ([prop integerValue]) {
             case 1: {
                 self.view.contentMode = UIViewContentModeScaleAspectFit;
@@ -111,10 +86,46 @@
                 break;
             }
         }
+        NSLog(@"scaleType size = %@",NSStringFromCGSize(self.view.image.size));
+        [self adjustContentViewMode:self.view.image];
     } else if ([@"loadCallback" isEqualToString:name]) {
         // Do not need set
     } else {
         [super blendView:view forPropName:name propValue:prop];
+    }
+}
+
+- (void)configImageWithData:(NSData *)imageData {
+    SDSVGKImage *image = [SDSVGKImage imageWithData:imageData];
+    SVGKImage *svgImage;
+    if ([image isKindOfClass:[SDSVGKImage class]]) {
+        svgImage = ((SDSVGKImage *)image).SVGKImage;
+    }
+    if (svgImage) {
+        [self adjustContentViewMode:svgImage];
+    }
+    if (self.loadCallbackId.length > 0) {
+        if (svgImage) {
+            [self callJSResponse:self.loadCallbackId,
+             @{
+                @"width": @(svgImage.size.width),
+                @"height": @(svgImage.size.height),
+            },
+             nil];
+        } else {
+            [self callJSResponse:self.loadCallbackId, nil];
+        }
+    }
+}
+
+- (void)adjustContentViewMode:(SVGKImage *)svgImage {
+    if (svgImage && svgImage.hasSize && svgImage.size.width > 0.1f) {
+#if SD_UIKIT
+        if (self.view.sd_adjustContentMode) {
+            SDAdjustSVGContentMode(svgImage, self.view.contentMode, self.view.bounds.size);
+        }
+#endif
+        self.view.image = svgImage;
     }
 }
 
