@@ -1,8 +1,8 @@
 include ':app'
 rootProject.name='example'
 
-include ":doric-svg"
-project(":doric-svg").projectDir = file("../../android")
+include ":lib"
+project(":lib").projectDir = file("../../android")
 
 //def nodeModuleDir = new File(rootDir.getParent() + File.separator + "node_modules")
 //if (nodeModuleDir.isDirectory()) {
