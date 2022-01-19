@@ -14,7 +14,7 @@ Doric plugins for SVG.
 
 ### Usage
 
-#### loaded by URL
+> 1. loaded by URL
 
 ```
 <SVG
@@ -33,7 +33,7 @@ Doric plugins for SVG.
 />
 ```
 
-#### loaded by customized resource loader
+> 2. loaded by customized resource loader
 
 ```
 <SVG
@@ -48,7 +48,7 @@ Doric plugins for SVG.
 />
 ```
 
-#### loaded by xml string
+> 3. loaded by xml string
 
 ```
 const xmlString = `<?xml version="1.1" encoding="UTF-8"?>
