@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'DoricSVG'
-    s.version          = '0.1.6'
+    s.version          = '0.1.7'
     s.summary          = 'Doric extension library for SVG'
     s.description      = <<-DESC
     Doric SVG plugin to load SVG.
@@ -17,5 +17,7 @@ Pod::Spec.new do |s|
     s.public_header_files = 'iOS/Classes/**/*.h'
     s.dependency 'DoricCore'
     s.dependency 'SDWebImageSVGKitPlugin'
+    s.pod_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
+    s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
 
 end
