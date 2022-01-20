@@ -8,8 +8,8 @@
 #import "DoricSVGViewNode.h"
 #import "DoricExtensions.h"
 #import "DoricUtil.h"
-#import "SVGKImageView+WebCache.h"
-#import "SDSVGKImage.h"
+#import <SKSVG/SDSVGKImage.h>
+#import <SKSVG/SVGKImageView+WebCache.h>
 
 @interface DoricSVGViewNode ()
 @property(nonatomic, copy) NSString *loadCallbackId;
