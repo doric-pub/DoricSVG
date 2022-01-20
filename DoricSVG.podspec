@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'DoricSVG'
-    s.version          = '0.1.9'
+    s.version          = '0.1.10'
     s.summary          = 'Doric extension library for SVG'
     s.description      = <<-DESC
     Doric SVG plugin to load SVG.
@@ -11,12 +11,9 @@ Pod::Spec.new do |s|
     s.source           = { :git => 'https://github.com/doric-pub/DoricSVG.git', :tag => s.version.to_s }
   
     s.ios.deployment_target = '9.0'
-  
     s.source_files = 'iOS/Classes/**/*'
     s.resource     =  "dist/**/*"
     s.public_header_files = 'iOS/Classes/**/*.h'
     s.dependency 'DoricCore'
-    s.dependency 'SDWebImageSVGKitPlugin'
-    s.pod_target_xcconfig = { 'VALID_ARCHS' => 'x86_64 armv7 arm64' }
-
+    s.dependency 'SKSVG'
 end
