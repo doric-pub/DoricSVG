@@ -6,7 +6,7 @@
 //
 
 #import "DoricViewNode.h"
-#import <SKSVG/SVGKit.h>
+#import "SVGKit.h"
 
 @interface DoricSVGViewNode : DoricViewNode<SVGKImageView *>
 

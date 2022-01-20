@@ -1,6 +1,6 @@
 #import "DoricSVGLibrary.h"
 #import "DoricSVGViewNode.h"
-#import <SKSVG/SDImageSVGKCoder.h>
+#import "SDImageSVGKCoder.h"
 
 @implementation DoricSVGLibrary
 - (void)load:(DoricRegistry *)registry {
