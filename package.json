@@ -25,6 +25,6 @@
     "@rollup/plugin-node-resolve": "^8.4.0"
   },
   "peerDependencies": {
-    "doric": ">=0.9.32",
+    "doric": ">=0.9.32"
   }
 }
