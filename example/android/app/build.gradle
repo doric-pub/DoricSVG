@@ -4,7 +4,7 @@ apply plugin: 'com.android.application'
 
 def model = new JsonSlurper().parse(new File(project.rootDir.parentFile.parent + File.separator + "package.json"))
 //def model = new JsonSlurper().parse(new File(project.rootDir.getParent() + File.separator + "package.json"))
-def doricSDKVersion = model.dependencies.doric.replace("^", "")
+def doricSDKVersion = model.peerDependencies.doric.replace("^", "")
 
 println("Doric Version:" + doricSDKVersion)
 
